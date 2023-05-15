@@ -1,0 +1,75 @@
+{% extends "base_generic.html"%}
+{% load static %}
+
+{% block title %}Результаты поиска | Movie Tracker{% endblock title%}
+
+{% block content%}
+
+    <section class="search_results">
+        <div class="container">
+            <h1 class="search_header fs-2">Результаты поиска:</h1>
+            <div class="search_cards_info text-end fs-5">
+                <span class="search_cards_page_begin"></span> - <span class="search_cards_page_end"></span> из <span class="search_cards_total"></span>
+            </div>
+            <div class="search_cards_wrapper">
+                {% if search_results %}
+                    {% for film in search_results %}
+                        {% if forloop.first %}
+                            <div class="search_cards_page search_cards_page_active">
+                        {% elif forloop.counter|add:5|divisibleby:6 %}
+                            <div class="search_cards_page">
+                        {% endif %}
+                        {% if forloop.counter|add:2|divisibleby:3  %}
+                                <div class="search_cards_row row">
+                        {% endif %}
+                                        <div class="col-4">
+                                            <div class="card w-100">
+                                                <img src="{{ film.image }}" class="card-img-top" alt="{{ film.title }}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ film.title }}</h5>
+                                                    <p class="card-text">{{ film.shortDescr }}</p>
+                                                    <a href="{{ film.get_absolute_url }}" class="btn btn-warning">Подробнее</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                        {% if forloop.counter|divisibleby:3 %}
+                                </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:6 or forloop.counter == search_results|length %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                <div class="search_not_found text-center">
+                    Результатов по вашему запросу нет
+                </div>
+                {% endif %}
+            </div>
+            <div class="pagination_wrapper d-flex justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link prev-arrow" href="#" aria-label="Previous">
+                          &laquo;
+                        </a>
+                      </li>
+                        {% for page in pages %}
+                            {% if forloop.first %}
+                                <li class="page-item active"><a class="page-link num_page" href="#">{{ page|add:1 }}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link num_page" href="#">{{ page|add:1 }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                      <li class="page-item">
+                        <a class="page-link next-arrow" href="#" aria-label="Next">
+                          &raquo;
+                        </a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+            
+        </div>
+    </section>
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock content %}

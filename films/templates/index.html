@@ -1,0 +1,119 @@
+{% extends "base_generic.html"%}
+{% load static %}
+
+{% block title %}Главная | Movie Tracker{% endblock title%}
+
+{% block content%}
+    {% if user.is_authenticated %}
+        <section class="wanted_films bg-light">
+            <div class="container">
+                <h1 class="wanted_films__header">Хочу посмотреть</h1>
+                {% if wanted_films %}
+                    <div id="carousel1" class="carousel slide mt-5" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            {% for wanted_film in wanted_films %}
+                            {% if forloop.counter|add:2|divisibleby:3  %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item active">
+                                {% else %}
+                                    <div class="carousel-item">
+                                {% endif %}
+                                        <div class="row d-flex">
+                            {% endif %}
+                                            <div class="col-4">
+                                                <div class="card w-100">
+                                                    <img src="{{ wanted_film.filmId.image }}" class="card-img-top" alt="{{ wanted_film.filmId.title }}">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ wanted_film.filmId.title }}</h5>
+                                                        <p class="card-text">{{ wanted_film.filmId.shortDescr }}</p>
+                                                        <a href="{{ wanted_film.filmId.get_absolute_url }}" class="btn btn-warning">Подробнее</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                {% if forloop.counter|divisibleby:3 or forloop.counter == wanted_films|length %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                        {% if wanted_films|length > 3 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Предыдущий</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Следующий</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="wanted_films_notexists mt-3">
+                        Добавьте фильмы через "Поиск"
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="watched_films bg-light">
+          <div class="container">
+                <h1 class="watched_films__header">Просмотренные фильмы</h1>
+
+                {% if watched_films %}
+                    <div id="carousel2" class="carousel slide mt-5" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            {% for watched_film in watched_films %}
+                            {% if forloop.counter|add:2|divisibleby:3  %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item active">
+                                {% else %}
+                                    <div class="carousel-item">
+                                {% endif %}
+                                        <div class="row d-flex">
+                            {% endif %}
+                                            <div class="col-4">
+                                                <div class="card w-100">
+                                                    <img src="{{ watched_film.filmId.image }}" class="card-img-top" alt="{{ watched_film.filmId.title }}">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ watched_film.filmId.title }}</h5>
+                                                        <p class="card-text">{{ watched_film.filmId.shortDescr }}</p>
+                                                        <a href="{{ watched_film.filmId.get_absolute_url }}" class="btn btn-warning">Подробнее</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                {% if forloop.counter|divisibleby:3 or forloop.counter == watched_films|length %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                        {% if watched_films|length > 3 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Предыдущий</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Следующий</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="watched_films_notexists mt-3">
+                        Добавьте фильмы через "Поиск"
+                    </div>
+                {% endif %}
+          </div>
+        </section>
+    {% else %}
+        <section class="not_authorized">
+            <div class="container">
+                <h2 class="text-center">
+                    Для просмотра содержимого авторизуйтесь или зарегистрируйтесь
+                </h2>
+            </div>
+        </section>
+    {% endif %}
+{% endblock content%}

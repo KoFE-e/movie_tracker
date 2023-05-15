@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block title%}Вход | Movie Tracker{% endblock title%}
+
+{% block content %}
+<section class="signin">
+    <div class="container">
+        <div class="form_wrapper d-flex justify-content-center align-items-center">
+
+            <form class="form-signin" method="post">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 font-weight-normal">Вход в аккаунт</h1>
+                {% for field in login_form %}
+                <label for="{{ field.id_for_label }}" class="sr-only mt-2">{{ field.label }}:</label>
+                <input type="{% if forloop.first %}text{% else %}password{% endif %}" id="{{ field.id_for_label }}" class="form-control mt-2" placeholder="{{ field.field.widget.attrs.placeholder }}" name="{{ field.html_name }}" required="">
+                {% endfor %}
+                <button class="btn btn-lg btn-warning btn-block mt-3" type="submit">Войти</button>
+                {% if login_form.errors %}
+                  <span class="text-danger mt-3 d-block">Неверный логин или пароль. Попробуйте еще раз</span>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

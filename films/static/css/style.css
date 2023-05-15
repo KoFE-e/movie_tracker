@@ -1,0 +1,138 @@
+section {
+    padding: 50px 0 50px 0;
+}
+
+
+.carousel-control-next-icon {
+    background-image: url('../icons/right.png');
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-control-prev-icon {
+    background-image: url('../icons/left.png');
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 50px;
+}
+
+.carousel-control-prev {
+    left: -100px;
+}
+
+.carousel-control-next {
+    right: -100px;
+}
+
+.film_info {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    min-height: 90vh;
+}
+
+.film_bg {
+    background-color: #000;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    z-index: 5;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.film_details {
+    position: relative;
+    border-radius: 25px;
+    z-index: 10;
+}
+
+.watched_films {
+    padding-top: 30px;
+}
+
+.search_cards_wrapper {
+    padding-top: 30px;
+}
+
+.search_cards_row {
+    margin-bottom: 50px;
+}
+
+.search_cards_info {
+    margin-top: 20px;
+}
+
+.page-item.active .page-link{
+    background-color: #ffca2c;
+    color: #000;
+}
+
+.page-link {
+    border: none;
+    color: #ffca2c;
+    background-color: #212529;
+}
+
+.page-link:hover {
+    background-color: #ffca2c;
+    color: #000;
+}
+
+.page-link:focus {
+    background-color: #ffca2c;
+    color: #000;
+    box-shadow: none;
+}
+
+.search_cards_page {
+    transition: 0.3s all;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.search_cards_page_active {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+.card-text {
+    min-height: 80px;
+}
+
+.wanted_films, .watched_films {
+    min-height: 500px;
+}
+
+.form_wrapper {
+    min-height: 75vh;
+}
+
+.card {
+    min-height: 800px;
+}
+
+.register-success {
+    min-height: 85vh;
+}
+
+.form-signin, .form-register {
+    width: 400px;
+}
+
+.not_authorized {
+    min-height: 85vh;
+}

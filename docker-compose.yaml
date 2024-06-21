@@ -7,8 +7,32 @@ services:
       POSTGRES_USER: "movie_tracker_user"
       POSTGRES_PASSWORD: "12345QWERTy"
       PGDATA: "/var/lib/postgresql/data/pgdata"
+    networks:
+      - movie_network
     ports:
       - 15432:5432
     volumes:
       - ./psql_data:/var/lib/postgresql/data
     restart: unless-stopped
+
+  movie_tracker:
+    container_name: movie_tracker_app
+    image: petrovykh03816/movie_tracker_app:latest
+    command:
+      - /bin/sh
+      - '-c'
+      - '/app/entrypoint.sh'
+    networks:
+      - movie_network
+    ports: 
+      - 8000:8000
+    depends_on:
+      - postgres_db
+    restart: unless-stopped
+
+
+networks:
+  movie_network:
+    driver: bridge
+    ipam:
+      driver: default

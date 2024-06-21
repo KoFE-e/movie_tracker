@@ -12,14 +12,21 @@ from movie_tracker.settings import KINOPOISK_LINK, KINOPOISK_HEADERS, KINOPOISK_
 
 def index(request):
 
-    wanted_films = WantedFilm.objects.all()
-    watched_films = WatchedFilm.objects.all()
+    user = request.user
+    if user.id != None:
+        wanted_films = WantedFilm.objects.filter(userId=user)
+        watched_films = WatchedFilm.objects.filter(userId=user)
 
-    return render(
-        request,
-        'index.html',
-        context={'wanted_films': wanted_films, 'watched_films': watched_films},
-    )
+        return render(
+            request,
+            'index.html',
+            context={'wanted_films': wanted_films, 'watched_films': watched_films},
+        )
+    else:
+        return render(
+            request,
+            'index.html',
+        )
 
 
 def film_detail(request, pk):

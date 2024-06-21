@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4h5mz6gzkuyg99sl9767+j53&=_vu8#0k5dsz76ob&4e#54uah'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -74,26 +74,26 @@ WSGI_APPLICATION = 'movie_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'movie_tracker',
-        'USER': 'postgres',
-        'PASSWORD': '1111',
+        'USER': 'movie_tracker_user',
+        'PASSWORD': '12345QWERTy',
         'HOST': 'localhost',
-        'PORT': '',
-    }
-}'''
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'KoFE$movie_tracker',
-        'USER': 'KoFE',
-        'PASSWORD': '8z9h9e9n5y6a0',
-        'HOST': 'KoFE.mysql.pythonanywhere-services.com',
+        'PORT': '15432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'KoFE$movie_tracker',
+#         'USER': 'KoFE',
+#         'PASSWORD': '8z9h9e9n5y6a0',
+#         'HOST': 'KoFE.mysql.pythonanywhere-services.com',
+#     }
+# }
 
 
 # Password validation
